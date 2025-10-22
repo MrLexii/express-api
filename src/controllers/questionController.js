@@ -11,15 +11,17 @@ export const getAllQuestions = (req, res)=>{
 export const postQuestions = (req, res)=>{
     const{ question, answer} = req.body
 
+    /*
     if(!question || !answer){
         res.status(400).send({
             error: "question et reponse requis",
         })
     }
-
+    */
     res.status(201).send({
-        message:"question crée avec succes",
+        message:"keçtion quraihai avèk çuckçest",
     })
+        
 }
 
 export const deleteQuestion = (req, res)=>{
