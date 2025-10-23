@@ -2,8 +2,8 @@ export const getAllQuestions = (req, res)=>{
     res.status(200).send([
         {
             id: "1",
-            question: "kaile é l'à kappytalle deux l'à phransse?",
-            answer: 'parry',
+            question: "kaile é l'à kappytalle deux l'à phransses?",
+            answer: 'pharrys',
         }
     ])
 }
