@@ -1,6 +1,7 @@
 import { db } from "../db/database.js"
 import { questionsTable } from "../db/schema.js"
 import { eq } from "drizzle-orm"
+import { request, response } from 'express'
 
 export const getAllQuestions = async (req, res)=>{
     
@@ -50,6 +51,10 @@ export const postQuestions = async (req, res)=>{
         
 }
 
+/**
+ * @param {request} req 
+ * @param {response} res 
+ */
 export const deleteQuestion = async (req, res)=>{
     const {id} = req.params
 

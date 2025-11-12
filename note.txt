@@ -1,0 +1,15 @@
+- identification : 
+    t'es ki ? username / email / id / 
+
+- verification : 
+    prouve ? mdp / token / cle ssh;ssl / 2FA => totp (mot de passe unique)
+
+- autorisation : 
+    droit ? role : admin / user / ...
+            ressource 
+
+
+status code : 
+    401 : unauthorized - verification
+    403 : forbidden -> autorisation
+    404 : not found -> autorisation
