@@ -1,7 +1,7 @@
 - identification : 
     t'es ki ? username / email / id / 
 
-- verification : 
+- authentification : 
     prouve ? mdp / token / cle ssh;ssl / 2FA => totp (mot de passe unique)
 
 - autorisation : 
@@ -10,6 +10,13 @@
 
 
 status code : 
-    401 : unauthorized - verification
+    401 : unauthorized - authentification
     403 : forbidden -> autorisation
     404 : not found -> autorisation
+
+
+Register:
+    -validation (body) => zod
+    -Hash du mot de passe 
+    -création du user (insert) => uniciter
+    -donnée user token jwt 
