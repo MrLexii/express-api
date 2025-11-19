@@ -24,3 +24,36 @@ export const register = async (req, res)=>{
         })
     } 
 }
+
+export const login = async (req, res) => {
+    try{
+        const{ email, password } = req.body;
+
+        await db.select().from(usersTable).where(eq(usersTable.email,email))
+
+        if(!user){
+            return res.status(401).json({error : 'Invalid email or password'})
+        }
+
+        const isValidPassword = await bcrypt.compare(password,user.password)
+
+        if(!isValidPassword){
+            return res.status(401).json({error : 'Invalid email or password'})
+        }
+
+        const token = jwt.sign({userId: result.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
+
+        res.status(200).json({
+            message: 'User logged in',
+            userData: {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+            },
+            token
+        })
+    } catch(error){
+        console.error(error)
+        res.status(500).json({error})
+    }
+}

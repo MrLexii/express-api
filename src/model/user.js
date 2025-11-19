@@ -5,3 +5,8 @@ export const createUserSchema = z.object({
     email : z.email(),
     password : z.string().min(8).max(255)
 })
+
+export const loginSchema = z.object({
+    email : z.email(),
+    password : z.string().min(8).max(255)
+})
