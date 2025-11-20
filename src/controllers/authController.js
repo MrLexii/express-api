@@ -16,7 +16,7 @@ export const register = async (req, res)=>{
         res.status(201).json({
             message: 'utyllyzatere quraihai',
             user: result,
-            token: 'TOKEN',
+            token: token,
         })
     } catch (error) {
         res.status(500).send({

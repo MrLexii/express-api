@@ -16,5 +16,5 @@ app.use('/users', userRoutes)
 app.use('/auth', authRoutes)
 
 app.listen(port, ()=>{
-    console.log(`server run on http://localhost${port}`)
+    console.log(`server run on http://localhost:${port}`)
 })
