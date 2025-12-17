@@ -1,5 +1,5 @@
 import { db } from "../db/database.js"
-import { questionsTable } from "../db/schema.js"
+import { questionsTable, usersTable } from "../db/schema.js"
 import { eq } from "drizzle-orm"
 import { request, response } from 'express'
 
@@ -13,16 +13,6 @@ export const getAllQuestions = async (req, res)=>{
             error: 'Failed to fetch questions'
         })
     }
-
-    /*
-    res.status(200).send([
-        {
-            id: "1",
-            question: "kaile é l'à kappytalle deux l'à phransses?",
-            answer: 'pharrys',
-        }
-    ])
-    */
 }
 
 export const postQuestions = async (req, res)=>{
@@ -32,23 +22,13 @@ export const postQuestions = async (req, res)=>{
         res.status(201).json({
             message: 'keçtion quraihai',
             question: result,
+            createdBy: req.userId,
         })
     } catch (error) {
         res.status(500).send({
             error: 'Failed to create questions'
         })
-    }
-    
-
-    /*
-    if(!question || !answer){
-        res.status(400).send({
-            error: "question et reponse requis",
-        })
-    }
-    */
-    
-        
+    }        
 }
 
 /**
@@ -56,7 +36,7 @@ export const postQuestions = async (req, res)=>{
  * @param {response} res 
  */
 export const deleteQuestion = async (req, res)=>{
-    const {id} = req.params
+    const {id, userId} = req.params
 
     try {
         const [result] = await db.delete(questionsTable).where(eq(questionsTable.id, id)).returning()
@@ -64,6 +44,11 @@ export const deleteQuestion = async (req, res)=>{
         if(!result){
             res.status(404).send({
                 error: "kaiçtion quonnée p'à "
+            })
+        }
+        if(result.createdBy !== parseInt(userId)){
+            return res.status(403).send({
+                error: "thu p'heu p'à çupprymais çete keçtion"
             })
         }
         res.status(200).send({
